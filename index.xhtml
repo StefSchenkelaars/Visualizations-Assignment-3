@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <title>WebGL Volume Rendering</title>
+  <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+
+  <!-- X3DOM -->
+  <link rel="stylesheet" type="text/css" href="/vendors/x3dom.css" />
+  <script type="text/javascript" src="/vendors/x3dom-full.js"></script>
+
+  <!-- JQUERY -->
+  <script type="text/javascript" src="/vendors/jquery-2.1.3.min.js"></script>
+
+  <!-- DAT.GUI -->
+  <script type="text/javascript" src="/vendors/dat.gui.min.js"></script>
+
+  <!-- CUSTOM -->
+  <script type="text/javascript" src="/script.js"></script>
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+
+</head>
+<body>
+
+  <UnusedVolumesContainer id='volume_container'>
+    <VolumeData id='opacity' dimensions='5.0 5.0 2.4'>
+      <ImageTextureAtlas containerField='voxels' url='slices_4096.png' numberOfSlices='80' slicesOverX='9' slicesOverY='9'/>
+      <OpacityMapVolumeStyle lightFactor='1.8' opacityFactor='10.0' />
+    </VolumeData>
+    <VolumeData id='slicer' dimensions='5.0 5.0 2.4'>
+      <ImageTextureAtlas containerField='voxels' url='slices_4096.png' numberOfSlices='80' slicesOverX='9' slicesOverY='9'/>
+      <MPRVolumeStyle originLine='0.0,0.0,1.0' finalLine='0.0,1.0,0.0' positionLine='0.5' />
+    </VolumeData>
+  </UnusedVolumesContainer>
+
+  <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' showStat='false' showLog='false'>
+    <Scene>
+      <Background skyColor='0.0 0.0 0.0'/>
+      <Viewpoint description='Default' zNear='0.0001' zFar='100' orientation="0.01 0.0 0.0 3.14" position="0.0 0.0 -6.0"/>
+      <Transform id='transform'>
+
+        <VolumeData id='edge' dimensions='5.0 5.0 2.4'>
+          <ImageTextureAtlas containerField='voxels' url='slices_4096.png' numberOfSlices='80' slicesOverX='9' slicesOverY='9'/>
+          <EdgeEnhancementVolumeStyle gradientThreshold='100.0' edgeColor='0 1 0' />
+        </VolumeData>
+
+      </Transform>
+    </Scene>
+  </X3D>
+</body>
+</html>
