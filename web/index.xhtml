@@ -45,9 +45,9 @@
       <Viewpoint description='Default' zNear='0.0001' zFar='100' orientation="0.01 0.0 0.0 3.14" position="0.0 0.0 -5.0"/>
       <Transform id='transform'>
 
-        <VolumeData id='edge' dimensions='5.0 5.0 2.4'>
+        <VolumeData id='mip' dimensions='5.0 5.0 2.4'>
           <ImageTextureAtlas containerField='voxels' url='slices_4096.png' numberOfSlices='80' slicesOverX='9' slicesOverY='9'/>
-          <EdgeEnhancementVolumeStyle gradientThreshold='100.0' edgeColor='0 1 0' />
+          <ProjectionVolumeStyle intensityThreshold='1' type='MAX'></ProjectionVolumeStyle>
         </VolumeData>
 
       </Transform>

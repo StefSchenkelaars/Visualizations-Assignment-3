@@ -2,7 +2,7 @@ var Settings = function() {
   this.Renderer = 'edge';
   this.Slice = 0.5;
   this.Transfer = 'bones';
-  this.Threshold = 0.0;
+  this.Selector = 'MAX';
 };
 
 var gui;
@@ -11,25 +11,27 @@ window.onload = function() {
   var settings = new Settings();
   gui = new dat.GUI();
 
-  var renderer = gui.add(settings, 'Renderer', ['edge', 'slicer', 'opacity']);
+  var renderer = gui.add(settings, 'Renderer', ['mip', 'slicer', 'opacity']);
   renderer.onChange(function(value) {
     $('#volume_container').append( $('#transform > VolumeData') );
     $('#transform').append( $('#' + value) );
 
-    edge_folder.close();
+    // intensity_folder.close();
     slicer_folder.close();
     opacity_folder.close();
-    eval(value + '_folder').open();
-
+    if(value != 'mip'){
+      eval(value + '_folder').open();
+    }
+    
     if (value == 'opacity') $('#legend').show();
     else $('#legend').hide();
   });
 
-  var edge_folder = gui.addFolder('Edge Options');
-  var edge_threshold = edge_folder.add(settings, 'Threshold', 0.0, 100.0);
-  edge_threshold.onChange(function(value){
-    $('#edge > EdgeEnhancementVolumeStyle').attr('gradientThreshold', value);
-  });
+  // var intensity_folder = gui.addFolder('intensity Options');
+  // var intensity_selector = intensity_folder.add(settings, 'Selector', ['MAX', 'AVERAGE']);
+  // intensity_selector.onChange(function(value){
+  //   $('#intensity > ProjectionVolumeStyle').attr('type', value);
+  // });
 
   var slicer_folder = gui.addFolder('Slicer Options');
   var slicer_position = slicer_folder.add(settings, 'Slice', 0.1, 0.78);
