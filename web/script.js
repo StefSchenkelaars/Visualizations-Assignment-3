@@ -20,6 +20,9 @@ window.onload = function() {
     slicer_folder.close();
     opacity_folder.close();
     eval(value + '_folder').open();
+
+    if (value == 'opacity') $('#legend').show();
+    else $('#legend').hide();
   });
 
   var edge_folder = gui.addFolder('Edge Options');
@@ -44,11 +47,13 @@ window.onload = function() {
         $('#transfer_function').attr('lightFactor', '1.1');
         $('#transfer_function').attr('opacityFactor', '6.0');
         $('#transfer_function ImageTexture').attr('url', 'transfer/skin.png');
+        $('#legend img').attr('src', 'transfer/skin.png');
         break;
       default:
         $('#transfer_function').attr('lightFactor', '1.8');
         $('#transfer_function').attr('opacityFactor', '10.0');
         $('#transfer_function ImageTexture').attr('url', 'transfer/bones.png');
+        $('#legend img').attr('src', 'transfer/bones.png');
     }
 
     document.getElementById('opacity')._x3domNode._dirty.shader = false;
