@@ -3,6 +3,9 @@ var Settings = function() {
   this.Slice = 0.5;
   this.Transfer = 'bones';
   this.Selector = 'MAX';
+  this.Info = function() {
+    $('#info-modal').modal('show');
+  }
 };
 
 var gui;
@@ -22,7 +25,7 @@ window.onload = function() {
     if(value != 'mip'){
       eval(value + '_folder').open();
     }
-    
+
     if (value == 'opacity') $('#legend').show();
     else $('#legend').hide();
   });
@@ -40,7 +43,7 @@ window.onload = function() {
   });
 
   var opacity_folder = gui.addFolder('Opacity Options');
-  var opacity_transfer = opacity_folder.add(settings, 'Transfer', ['bones', 'skin']);
+  var opacity_transfer = opacity_folder.add(settings, 'Transfer', ['none', 'bones', 'skin', 'skin+bones']);
   opacity_transfer.onChange(function(value) {
     document.getElementById('opacity')._x3domNode._dirty.shader = true;
 
@@ -50,14 +53,32 @@ window.onload = function() {
         $('#transfer_function').attr('opacityFactor', '6.0');
         $('#transfer_function ImageTexture').attr('url', 'transfer/skin.png');
         $('#legend img').attr('src', 'transfer/skin.png');
+        $('#legend .right').css('color', '#fff')
+        break;
+      case 'skin+bones':
+        $('#transfer_function').attr('lightFactor', '1.2');
+        $('#transfer_function').attr('opacityFactor', '6.0');
+        $('#transfer_function ImageTexture').attr('url', 'transfer/skinbones.png');
+        $('#legend img').attr('src', 'transfer/skinbones.png');
+        $('#legend .right').css('color', '#fff')
+        break;
+      case 'none':
+        $('#transfer_function').attr('lightFactor', '1.2');
+        $('#transfer_function').attr('opacityFactor', '6.0');
+        $('#transfer_function ImageTexture').attr('url', 'transfer/none.png');
+        $('#legend img').attr('src', 'transfer/none.png');
+        $('#legend .right').css('color', '#000')
         break;
       default:
         $('#transfer_function').attr('lightFactor', '1.8');
         $('#transfer_function').attr('opacityFactor', '10.0');
         $('#transfer_function ImageTexture').attr('url', 'transfer/bones.png');
         $('#legend img').attr('src', 'transfer/bones.png');
+        $('#legend .right').css('color', '#000')
     }
 
     document.getElementById('opacity')._x3domNode._dirty.shader = false;
   });
+
+  gui.add(settings, 'Info');
 }
