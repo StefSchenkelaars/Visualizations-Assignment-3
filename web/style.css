@@ -1,11 +1,7 @@
-html, body {
+html, body, X3D {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-}
-
-X3D {
+  border: 0;
   width: 100%;
   height: 100%;
 }

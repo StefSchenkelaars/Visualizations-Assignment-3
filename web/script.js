@@ -1,9 +1,7 @@
 var Settings = function() {
   this.Renderer = 'edge';
   this.Slice = 0.5;
-  this.BOOM = function(){
-    alert('BOOM!');
-  }
+  this.Transfer = 'bones';
   this.Threshold = 0.0;
 };
 
@@ -37,5 +35,22 @@ window.onload = function() {
   });
 
   var opacity_folder = gui.addFolder('Opacity Options');
-  opacity_folder.add(settings, 'BOOM');
+  var opacity_transfer = opacity_folder.add(settings, 'Transfer', ['bones', 'skin']);
+  opacity_transfer.onChange(function(value) {
+    document.getElementById('opacity')._x3domNode._dirty.shader = true;
+
+    switch (value) {
+      case 'skin':
+        $('#transfer_function').attr('lightFactor', '1.1');
+        $('#transfer_function').attr('opacityFactor', '6.0');
+        $('#transfer_function ImageTexture').attr('url', 'transfer/skin.png');
+        break;
+      default:
+        $('#transfer_function').attr('lightFactor', '1.8');
+        $('#transfer_function').attr('opacityFactor', '10.0');
+        $('#transfer_function ImageTexture').attr('url', 'transfer/bones.png');
+    }
+
+    document.getElementById('opacity')._x3domNode._dirty.shader = false;
+  });
 }

@@ -7,6 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
 
   <!-- X3DOM -->
+  <script>
+  X3DOM_SECURITY_OFF = true;
+  </script>
   <link rel="stylesheet" type="text/css" href="vendors/x3dom.css" />
   <script type="text/javascript" src="vendors/x3dom-full.js"></script>
 
@@ -26,8 +29,8 @@
   <UnusedVolumesContainer id='volume_container'>
     <VolumeData id='opacity' dimensions='5.0 5.0 2.4'>
       <ImageTextureAtlas containerField='voxels' url='slices_4096.png' numberOfSlices='80' slicesOverX='9' slicesOverY='9'/>
-      <OpacityMapVolumeStyle lightFactor='1.8' opacityFactor='10.0'>
-        <ImageTexture containerField='transferFunction' url='transfer.png'/>
+      <OpacityMapVolumeStyle id="transfer_function" lightFactor='1.8' opacityFactor='10.0'>
+        <ImageTexture containerField='transferFunction' url='transfer/bones.png'/>
       </OpacityMapVolumeStyle>
     </VolumeData>
     <VolumeData id='slicer' dimensions='5.0 5.0 2.4'>
@@ -39,7 +42,7 @@
   <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' showStat='false' showLog='false'>
     <Scene>
       <Background skyColor='0.0 0.0 0.0'/>
-      <Viewpoint description='Default' zNear='0.0001' zFar='100' orientation="0.01 0.0 0.0 3.14" position="0.0 0.0 -6.0"/>
+      <Viewpoint description='Default' zNear='0.0001' zFar='100' orientation="0.01 0.0 0.0 3.14" position="0.0 0.0 -5.0"/>
       <Transform id='transform'>
 
         <VolumeData id='edge' dimensions='5.0 5.0 2.4'>
